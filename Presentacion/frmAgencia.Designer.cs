@@ -38,6 +38,9 @@
             this.gridAgencia = new System.Windows.Forms.DataGridView();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnGuardarCambios = new System.Windows.Forms.Button();
+            this.btnExportarExcel = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btnVolverInicio = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.administracionDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.agenciaBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridAgencia)).BeginInit();
@@ -89,12 +92,12 @@
             this.gridAgencia.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridAgencia.Location = new System.Drawing.Point(34, 138);
             this.gridAgencia.Name = "gridAgencia";
-            this.gridAgencia.Size = new System.Drawing.Size(468, 150);
+            this.gridAgencia.Size = new System.Drawing.Size(468, 194);
             this.gridAgencia.TabIndex = 4;
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(537, 251);
+            this.btnEliminar.Location = new System.Drawing.Point(537, 255);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(168, 37);
             this.btnEliminar.TabIndex = 5;
@@ -110,13 +113,45 @@
             this.btnGuardarCambios.TabIndex = 6;
             this.btnGuardarCambios.Text = "GUARDAR CAMBIOS";
             this.btnGuardarCambios.UseVisualStyleBackColor = true;
-         
+            // 
+            // btnExportarExcel
+            // 
+            this.btnExportarExcel.Location = new System.Drawing.Point(537, 322);
+            this.btnExportarExcel.Name = "btnExportarExcel";
+            this.btnExportarExcel.Size = new System.Drawing.Size(168, 37);
+            this.btnExportarExcel.TabIndex = 7;
+            this.btnExportarExcel.Text = "EXPORTAR A EXCEL";
+            this.btnExportarExcel.UseVisualStyleBackColor = true;
+            this.btnExportarExcel.Click += new System.EventHandler(this.btnExportarExcel_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(537, 385);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(168, 37);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "EXPORTAR A CSV";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // btnVolverInicio
+            // 
+            this.btnVolverInicio.Location = new System.Drawing.Point(34, 23);
+            this.btnVolverInicio.Name = "btnVolverInicio";
+            this.btnVolverInicio.Size = new System.Drawing.Size(107, 23);
+            this.btnVolverInicio.TabIndex = 9;
+            this.btnVolverInicio.Text = "VOLVER A INICIO";
+            this.btnVolverInicio.UseVisualStyleBackColor = true;
+            this.btnVolverInicio.Click += new System.EventHandler(this.btnVolverInicio_Click);
             // 
             // frmAgencia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnVolverInicio);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnExportarExcel);
             this.Controls.Add(this.btnGuardarCambios);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.gridAgencia);
@@ -145,5 +180,8 @@
         private System.Windows.Forms.DataGridView gridAgencia;
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnGuardarCambios;
+        private System.Windows.Forms.Button btnExportarExcel;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnVolverInicio;
     }
 }

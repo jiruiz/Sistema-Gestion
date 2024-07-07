@@ -9,6 +9,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ClosedXML.Excel;
+using System.IO;
+
+
 
 namespace Presentacion
 {
@@ -25,8 +29,7 @@ namespace Presentacion
 
         private void frmAgencia_Load(object sender, EventArgs e)
         {
-            // TODO: esta línea de código carga datos en la tabla 'administracionDataSet.Agencia'
-            this.agenciaTableAdapter.Fill(this.administracionDataSet.Agencia);
+            
             CargarDatos();
         }
 
@@ -138,7 +141,92 @@ namespace Presentacion
             }
         }
 
+        private void btnExportarExcel_Click(object sender, EventArgs e)
+        {
+            if (gridAgencia.DataSource is List<Agencia> listaAgencias && listaAgencias.Count > 0)
+            {
+                try
+                {
+                    using (var workbook = new XLWorkbook())
+                    {
+                        var worksheet = workbook.Worksheets.Add("Agencias");
 
+                        // Agregar encabezados
+                        worksheet.Cell(1, 1).Value = "Id";
+                        worksheet.Cell(1, 2).Value = "Nombre";
 
+                        // Agregar datos
+                        int fila = 2;
+                        foreach (var agencia in listaAgencias)
+                        {
+                            worksheet.Cell(fila, 1).Value = agencia.Id;
+                            worksheet.Cell(fila, 2).Value = agencia.Nombre;
+                            fila++;
+                        }
+
+                        // Guardar el archivo
+                        using (var saveFileDialog = new SaveFileDialog())
+                        {
+                            saveFileDialog.Filter = "Excel files (*.xlsx)|*.xlsx";
+                            saveFileDialog.Title = "Guardar como Excel";
+
+                            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                            {
+                                workbook.SaveAs(saveFileDialog.FileName);
+                                MessageBox.Show("Datos exportados exitosamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error al exportar a Excel: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No hay datos para exportar.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (gridAgencia.DataSource is List<Agencia> listaAgencias && listaAgencias.Count > 0)
+            {
+                StringBuilder csvContent = new StringBuilder();
+                csvContent.AppendLine("Id,Nombre");
+
+                foreach (var agencia in listaAgencias)
+                {
+                    csvContent.AppendLine($"{agencia.Id},{agencia.Nombre}");
+                }
+
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "CSV files (*.csv)|*.csv";
+                saveFileDialog.Title = "Guardar como CSV";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    File.WriteAllText(saveFileDialog.FileName, csvContent.ToString());
+                    MessageBox.Show("Datos exportados exitosamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No hay datos para exportar.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void btnVolverInicio_Click(object sender, EventArgs e)
+        {
+            
+            //Program.frmAgenci.Show();
+            frmInicio ventanaInicio = new frmInicio();
+            ventanaInicio.ShowDialog();  
+        }
+
+       
     }
+    
+    
 }

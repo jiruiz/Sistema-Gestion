@@ -11,22 +11,14 @@ namespace Datos
     {
         public MyDbContext() : base("name=AdministracionEntities")
         {
-            Database.SetInitializer<MyDbContext>(new CreateDatabaseIfNotExists<MyDbContext>());
+            
+            //Database.SetInitializer<MyDbContext>(new CreateDatabaseIfNotExists<MyDbContext>());
 
         }
 
         public DbSet<Agencia> Agencia { get; set; }
         public DbSet<Deposito> Deposito { get; set; }
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            // Configurar la relación uno a muchos entre Agencia y Deposito
-            modelBuilder.Entity<Deposito>()
-                .HasRequired(d => d.Agencia)
-                .WithMany(a => a.Deposito)
-                .HasForeignKey(d => d.idAgencia);
-
-            base.OnModelCreating(modelBuilder);
-        }
+        
 
     }
 }

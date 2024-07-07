@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Bibliography;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ namespace Presentacion
 {
     internal static class Program
     {
+        //public static frmAgencia frmAgenci;
         /// <summary>
         /// Punto de entrada principal para la aplicación.
         /// </summary>
@@ -16,7 +18,7 @@ namespace Presentacion
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmAgencia());
+            Application.Run(new frmInicio());
         }
     }
 }
