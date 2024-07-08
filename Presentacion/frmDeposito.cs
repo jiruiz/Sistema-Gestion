@@ -10,6 +10,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ClosedXML.Excel;
+using System.IO;
+
+
 
 namespace Presentacion
 {
@@ -216,6 +220,90 @@ namespace Presentacion
             else
             {
                 MessageBox.Show("Seleccione la fila para eliminar.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnExportarExcel_Click(object sender, EventArgs e)
+        {
+            if (gridDeposito.DataSource is List<Deposito> listaDeposito && listaDeposito.Count > 0)
+            {
+                try
+                {
+                    using (var workbook = new XLWorkbook())
+                    {
+                        var worksheet = workbook.Worksheets.Add("Depositos");
+
+                        // Agregar encabezados
+                        worksheet.Cell(1, 1).Value = "ID Deposito";
+                        worksheet.Cell(1, 2).Value = "Fecha";
+                        worksheet.Cell(1, 3).Value = "Importe";
+                        worksheet.Cell(1, 4).Value = "Banco";
+                        worksheet.Cell(1, 5).Value = "Observaciones";
+                        worksheet.Cell(1, 6).Value = "ID Agencia";
+
+                        // Agregar datos
+                        int fila = 2;
+                        foreach (var deposito in listaDeposito)
+                        {
+                            worksheet.Cell(fila, 1).Value = deposito.Id;
+                            worksheet.Cell(fila, 2).Value = deposito.FechaDeposito;
+                            worksheet.Cell(fila, 3).Value = deposito.ImporteDeposito;
+                            worksheet.Cell(fila, 4).Value = deposito.BancoDeposito;
+                            worksheet.Cell(fila, 5).Value = deposito.ObservacionesDepositos;
+                            worksheet.Cell(fila, 6).Value = deposito.idAgencia;
+                            fila++;
+                        }
+
+                        // Guardar el archivo
+                        using (var saveFileDialog = new SaveFileDialog())
+                        {
+                            saveFileDialog.Filter = "Excel files (*.xlsx)|*.xlsx";
+                            saveFileDialog.Title = "Guardar como Excel";
+
+                            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                            {
+                                workbook.SaveAs(saveFileDialog.FileName);
+                                MessageBox.Show("Datos exportados exitosamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error al exportar a Excel: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No hay datos para exportar.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void btnCSV_Click(object sender, EventArgs e)
+        {
+            if (gridDeposito.DataSource is List<Deposito> listaDeposito && listaDeposito.Count > 0)
+            {
+                StringBuilder csvContent = new StringBuilder();
+                csvContent.AppendLine("Id,FechaDeposito,ImporteDeposito,ObservacionesDepositos,idAgencia");
+
+                foreach (var deposito in listaDeposito)
+                {
+                    csvContent.AppendLine($"{deposito.Id},{Convert.ToDateTime(deposito.FechaDeposito)},{deposito.ImporteDeposito},{deposito.BancoDeposito},{deposito.ObservacionesDepositos},{deposito.idAgencia}");
+                }
+
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "CSV files (*.csv)|*.csv";
+                saveFileDialog.Title = "Guardar como CSV";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    File.WriteAllText(saveFileDialog.FileName, csvContent.ToString());
+                    MessageBox.Show("Datos exportados exitosamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No hay datos para exportar.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }

@@ -36,31 +36,35 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(255, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(240, 25);
+            this.label1.Size = new System.Drawing.Size(269, 29);
             this.label1.TabIndex = 0;
             this.label1.Text = "PANTALLA DE INICIO";
             // 
             // btnIrAgencias
             // 
-            this.btnIrAgencias.Location = new System.Drawing.Point(124, 98);
+            this.btnIrAgencias.BackColor = System.Drawing.Color.LightBlue;
+            this.btnIrAgencias.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIrAgencias.Location = new System.Drawing.Point(99, 96);
             this.btnIrAgencias.Name = "btnIrAgencias";
-            this.btnIrAgencias.Size = new System.Drawing.Size(169, 41);
+            this.btnIrAgencias.Size = new System.Drawing.Size(257, 41);
             this.btnIrAgencias.TabIndex = 1;
             this.btnIrAgencias.Text = "GESTINAR AGENCIAS";
-            this.btnIrAgencias.UseVisualStyleBackColor = true;
+            this.btnIrAgencias.UseVisualStyleBackColor = false;
             this.btnIrAgencias.Click += new System.EventHandler(this.btnIrAgencias_Click);
             // 
             // btnIrDepositos
             // 
-            this.btnIrDepositos.Location = new System.Drawing.Point(453, 98);
+            this.btnIrDepositos.BackColor = System.Drawing.Color.LightBlue;
+            this.btnIrDepositos.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIrDepositos.Location = new System.Drawing.Point(428, 96);
             this.btnIrDepositos.Name = "btnIrDepositos";
-            this.btnIrDepositos.Size = new System.Drawing.Size(194, 41);
+            this.btnIrDepositos.Size = new System.Drawing.Size(282, 41);
             this.btnIrDepositos.TabIndex = 2;
             this.btnIrDepositos.Text = "GESTIONAR DEPOSITOS ";
-            this.btnIrDepositos.UseVisualStyleBackColor = true;
+            this.btnIrDepositos.UseVisualStyleBackColor = false;
             this.btnIrDepositos.Click += new System.EventHandler(this.btnIrDepositos_Click);
             // 
             // frmInicio
